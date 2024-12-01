@@ -76,15 +76,15 @@ body {
   
   /* General animations for win and draw */
 @keyframes winEffect {
-  0% { background-color: #74ebd5; transform: scale(1); }
-  50% { background-color: #ff7675; transform: scale(1.1); }
-  100% { background-color: #74ebd5; transform: scale(1); }
+  0% { background-color: lightgreen; transform: scale(1); }
+  50% { background-color: green; transform: scale(1.1); }
+  100% { background-color: lightgreen; transform: scale(1); }
 }
 
 @keyframes drawEffect {
-  0% { background-color: #ffeaa7; }
-  50% { background-color: #fab1a0; }
-  100% { background-color: #ffeaa7; }
+  0% { background-color: pink; }
+  50% { background-color: red; }
+  100% { background-color: pink; }
 }
 
 .board.win-animation {
