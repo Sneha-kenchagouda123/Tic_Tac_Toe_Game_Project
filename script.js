@@ -1,6 +1,13 @@
 const cells = document.querySelectorAll('.cell');
 const statusText = document.querySelector('.status');
 const restartBtn = document.querySelector('.restart');
+const boardElement = document.querySelector('.board');
+
+// Create audio elements for win and draw
+const winAudio = new Audio('victory.mp3'); // Replace with your victory sound file
+const drawAudio = new Audio('draw.mp3');  // Replace with your draw sound file
+winAudio.volume = 0.5; // Adjust volume if needed
+drawAudio.volume = 0.5;
 
 let currentPlayer = 'X';
 let board = ['', '', '', '', '', '', '', '', ''];
@@ -21,6 +28,7 @@ const checkWin = () => {
   for (let combo of winningCombinations) {
     const [a, b, c] = combo;
     if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      combo.forEach(index => cells[index].classList.add('winning-cell'));
       return true;
     }
   }
@@ -40,11 +48,15 @@ const handleCellClick = (e) => {
   cell.classList.add('taken');
 
   if (checkWin()) {
-    statusText.textContent = `Player ${currentPlayer} wins!`;
+    boardElement.classList.add('win-animation');
+    statusText.textContent = `Player ${currentPlayer} wins! 🎉`;
     gameActive = false;
+    winAudio.play(); // Play win sound
   } else if (checkDraw()) {
-    statusText.textContent = 'It\'s a draw!';
+    boardElement.classList.add('draw-animation');
+    statusText.textContent = 'It\'s a draw! 🤝';
     gameActive = false;
+    drawAudio.play(); // Play draw sound
   } else {
     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
     statusText.textContent = `Player ${currentPlayer}'s turn`;
@@ -56,9 +68,10 @@ const restartGame = () => {
   gameActive = true;
   currentPlayer = 'X';
   statusText.textContent = `Player X's turn`;
+  boardElement.classList.remove('win-animation', 'draw-animation');
   cells.forEach(cell => {
     cell.textContent = '';
-    cell.classList.remove('taken');
+    cell.classList.remove('taken', 'winning-cell');
   });
 };
 
