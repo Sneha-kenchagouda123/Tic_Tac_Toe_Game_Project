@@ -74,3 +74,31 @@ body {
     background: #0984e3;
   }
   
+  /* General animations for win and draw */
+@keyframes winEffect {
+  0% { background-color: #74ebd5; transform: scale(1); }
+  50% { background-color: #ff7675; transform: scale(1.1); }
+  100% { background-color: #74ebd5; transform: scale(1); }
+}
+
+@keyframes drawEffect {
+  0% { background-color: #ffeaa7; }
+  50% { background-color: #fab1a0; }
+  100% { background-color: #ffeaa7; }
+}
+
+.board.win-animation {
+  animation: winEffect 1s infinite;
+}
+
+.board.draw-animation {
+  animation: drawEffect 1s infinite;
+}
+
+.winning-cell {
+  background: #55efc4;
+  color: #2d3436;
+  animation: winEffect 1s infinite;
+}
+
+
